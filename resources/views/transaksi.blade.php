@@ -22,10 +22,10 @@
                         <input class="btn btn-primary ml-3" type="submit" value="CARI">                   
                     </form>
                     
-                    <div style="margin-left:38.7%">
+                    <div style="margin-left:25rem">
                         <a href="/donatur"><input class="btn btn-danger ml-3" type="button" value="DONATUR"></a>
                         <a href="/koordinator"><input class="btn btn-warning ml-3" type="button" value="KOORDINATOR"></a>
-                        <a href="/reff_donoasi"><input class="btn btn-success ml-3" type="button" value="REF. DONASI"></a>
+                        <a href="/reff_donasi"><input class="btn btn-success ml-3" type="button" value="REF. DONASI"></a>
                     </div>
                 </div>
 

@@ -21,7 +21,8 @@
 				</div>
 				<form action="/koordinator/cari" method="GET" class="form-inline">
 					<input class="form-control" type="text" name="cari" placeholder="Cari Koordinator .." value="{{ old('cari') }}">
-					<input class="btn btn-primary ml-3" type="submit" value="CARI">                    
+					<input class="btn btn-primary ml-3" type="submit" value="CARI">       
+                    <a href="/transaksi" class="btn btn-primary ml-3">Kembali</a>                    
 				</form>
  
 				<br/>
