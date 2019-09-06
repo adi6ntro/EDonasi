@@ -1,71 +1,64 @@
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-        <title>Donasi</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    Edit Data Donatur
-                </div>
-                <div class="card-body">
-                    <a href="/donatur" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
-                    
+@extends('layouts.app')
 
-                    <form method="post" action="/donatur/update">
+@section('title', 'Donatur')
 
-                        {{ csrf_field() }}
+@section('content')
 
-                        <input type="hidden" name="id" value="{{ $donatur->id }}"> <br/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Edit Data Donatur</h4>
+                <p class="card-category">Silahkan diperbaharui</p>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/donatur/update">
 
+                    {{ csrf_field() }}
+
+                    <input type="hidden" name="id" value="{{ $donatur->id }}">
+
+                    <div class="row">
+                        <div class="col-md-12">
                         <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama donatur .." value=" {{ $donatur->nama }}">
-
-                            <!-- @if($errors->has('nama'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama')}}
-                                </div>
-                            @endif -->
-
+                            <label class="bmd-label-floating">Nama</label>
+                            <input type="text" class="form-control form-control-custom" name="nama" value=" {{ $donatur->nama }}">
                         </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                      <div class="col-md-12">
                         <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea name="alamat" class="form-control" placeholder="Alamat donatur .."> {{ $donatur->alamat }} </textarea>
-
-                             <!-- @if($errors->has('alamat'))
-                                <div class="text-danger">
-                                    {{ $errors->first('alamat')}}
-                                </div>
-                            @endif -->
-
+                          <label>Alamat</label>
+                          <div class="form-group">
+                            <label class="bmd-label-floating"> Contoh: Jl. Mawar-Melati Semuanya Indah</label>
+                            <textarea name="alamat" class="form-control form-control-custom" rows="5">{{ $donatur->alamat }}</textarea>
+                          </div>
                         </div>
+                      </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-12">
                         <div class="form-group">
-                            <label>No. Telepon</label>
-                            <input type="text" name="telpon" class="form-control" placeholder="No. Telelpon donatur .." value=" {{ $donatur->telpon }}">
-
-                             <!-- @if($errors->has('telpon'))
-                                <div class="text-danger">
-                                    {{ $errors->first('telpon')}}
-                                </div>
-                            @endif -->
-
+                            <label class="bmd-label-floating">No. Telepon</label>
+                            <input type="text" class="form-control form-control-custom" name="telpon" value=" {{ $donatur->telpon }}">
                         </div>
-
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Simpan">
                         </div>
+                    </div>
+                
+                    <button type="submit" class="btn btn-success pull-right">Simpan</button>
+                    <a href="/transaksi" class="btn btn-warning pull-right">Kembali</a>                  
 
-                    </form>
+                    <div class="clearfix"></div>
 
-                </div>
+                </form>
+            </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

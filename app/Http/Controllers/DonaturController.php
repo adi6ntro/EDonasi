@@ -10,7 +10,7 @@ class DonaturController extends Controller
     public function index() {
         $donatur = DB::table('donatur')->paginate(5);
 
-        return view('/donatur/donatur', ['donatur' => $donatur]);
+        return view('/donatur/donatur', ['donatur' => $donatur, 'nomer' => 1]);
     }
 
     public function cari(Request $request) {
@@ -22,7 +22,21 @@ class DonaturController extends Controller
         ->orWhere('telpon', 'like', "%".$cari."%")
         ->paginate();
 
-        return view('/donatur/donatur', ['donatur' => $donatur]);
+        return view('/donatur/donatur', ['donatur' => $donatur, 'nomer' => 1]);
+    }
+
+    public function add() {
+        return view('/donatur/add_donatur');
+    }
+
+    public function save(Request $request) {
+        DB::table('donatur')->insert([
+            'nama'      => $request->nama,
+            'alamat'    => $request->alamat,
+            'telpon'    => $request->telpon
+        ]);
+
+        return redirect('/donatur');
     }
 
     public function edit($id) {

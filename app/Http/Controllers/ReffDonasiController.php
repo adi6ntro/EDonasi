@@ -10,7 +10,7 @@ class ReffDonasiController extends Controller
     public function index() {
         $reff_donasi = DB::table('reff_donasi')->paginate(5);
 
-        return view('/reff_donasi/reff_donasi', ['reff_donasi' => $reff_donasi]);
+        return view('/reff_donasi/reff_donasi', ['reff_donasi' => $reff_donasi, 'nomer' => 1]);
     }
 
     public function cari(Request $request) {
@@ -21,7 +21,20 @@ class ReffDonasiController extends Controller
         ->orWhere('keterangan', 'like', "%".$cari."%")
         ->paginate();
 
-        return view('/reff_donasi/reff_donasi', ['reff_donasi' => $reff_donasi]);
+        return view('/reff_donasi/reff_donasi', ['reff_donasi' => $reff_donasi, 'nomer' => 1]);
+    }
+
+    public function add() {
+        return view('/reff_donasi/add_reff_donasi');
+    }
+
+    public function save(Request $request) {
+        DB::table('reff_donasi')->insert([
+            'nama'      => $request->nama,
+            'keterangan'=> $request->keterangan
+        ]);
+
+        return redirect('/reff_donasi');
     }
 
     public function edit($id) {

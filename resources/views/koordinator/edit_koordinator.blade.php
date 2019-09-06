@@ -1,95 +1,98 @@
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-        <title>Donasi</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    Edit Data Koordinator
-                </div>
-                <div class="card-body">
-                    <a href="/koordinator" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
-                    
+@extends('layouts.app')
 
-                    <form method="post" action="/koordinator/update">
+@section('title', 'Koordinator')
 
-                        {{ csrf_field() }}
+@section('content')
 
-                        <input type="hidden" name="id" value="{{ $koordinator->id }}"> <br/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Edit Data Koordinator</h4>
+                <p class="card-category">Silahkan diperbaharui</p>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/koordinator/update">
 
-                        <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama koordinator .." value=" {{ $koordinator->nama }}">
+                    {{ csrf_field() }}
 
-                            <!-- @if($errors->has('nama'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama')}}
-                                </div>
-                            @endif -->
+                    @foreach($koordinator as $data)
+                        <input type="hidden" name="id" value="{{ $data->id }}">
 
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Nama</label>
+                                <input type="text" class="form-control form-control-custom" name="nama" value="{{ $data->nama }}">
+                            </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
                             <label>Alamat</label>
-                            <textarea name="alamat" class="form-control" placeholder="Alamat koordinator .."> {{ $koordinator->alamat }} </textarea>
+                            <div class="form-group">
+                                <label class="bmd-label-floating"> Contoh: Jl. Mawar-Melati Semuanya Indah</label>
+                                <textarea name="alamat" class="form-control form-control-custom" rows="5">{{ $data->alamat }}</textarea>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
 
-                             <!-- @if($errors->has('alamat'))
-                                <div class="text-danger">
-                                    {{ $errors->first('alamat')}}
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">No. Telepon</label>
+                                <input type="text" class="form-control form-control-custom" name="telpon" value="{{ $data->telpon }}">
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Tgl. Masuk</label>                
+                                    <input type="text" class="form-control datetimepicker-show" name="tgl_masuk" value="{{ $data->tgl_masuk }}">                                                
+                                    <input type="text" class="form-control form-control-custom datetimepicker datetimepicker-hide" name="tgl_masuk" value="{{ $data->tgl_masuk }}">
                                 </div>
-                            @endif -->
-
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>No. Telepon</label>
-                            <input type="text" name="telpon" class="form-control" placeholder="No. Telepon koordinator .." value=" {{ $koordinator->telpon }}">
-
-                             <!-- @if($errors->has('telpon'))
-                                <div class="text-danger">
-                                    {{ $errors->first('telpon')}}
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">No. Anggota</label>
+                                <input type="text" class="form-control form-control-custom" name="no_anggota" value="{{ $data->no_anggota }}">
                                 </div>
-                            @endif -->
-
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Tgl. Masuk</label>
-                            <input type="text" name="tgl_masuk" class="form-control" placeholder="Tgl. Masuk .." value=" {{ $koordinator->tgl_masuk }}">
-
-                             <!-- @if($errors->has('telpon'))
-                                <div class="text-danger">
-                                    {{ $errors->first('telpon')}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select class="selectpicker" data-size="7" data-style="select-with-transition"  name="kantor_id">
+                                        <option selected value="{{ $data->kantor_id }}" class="selected-data">{{ $data->nama_kantor }}</option>
+                                        @foreach($kantor as $kan)
+                                            <option value="{{ $kan->id }}">{{ $kan->nama }}</option>                                    
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @endif -->
-
+                            </div>
                         </div>
+                    @endforeach
 
-                        <div class="form-group">
-                            <label>No. Anggota</label>
-                            <input type="text" name="no_anggota" class="form-control" placeholder="No. Anggota .." value=" {{ $koordinator->no_anggota }}">
+                    <button type="submit" class="btn btn-success pull-right">Simpan</button>
+                    <a href="/transaksi" class="btn btn-warning pull-right">Kembali</a>                  
 
-                             <!-- @if($errors->has('telpon'))
-                                <div class="text-danger">
-                                    {{ $errors->first('telpon')}}
-                                </div>
-                            @endif -->
+                    <div class="clearfix"></div>
 
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Simpan">
-                        </div>
-
-                    </form>
-
-                </div>
+                </form>
+            </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

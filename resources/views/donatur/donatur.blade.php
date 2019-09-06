@@ -1,65 +1,76 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Donasi</title>
-	<link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-</head>
-<body>
- 
-	<div class="container">
-		<div class="card">
-			<div class="card-body">
-				
-				<h2 class="text-center">Donasi</h2>
- 
-				<h3>Data Donatur</h3>
- 
-				<p>Cari Donatur :</p>
- 
-				<div class="form-group">
-					
-				</div>
-				<form action="/donatur/cari" method="GET" class="form-inline">
-					<input class="form-control" type="text" name="cari" placeholder="Cari Donatur .." value="{{ old('cari') }}">
-					<input class="btn btn-primary ml-3" type="submit" value="CARI">   
-					<a href="/transaksi" class="btn btn-primary ml-3">Kembali</a>                        
-				</form>
- 
-				<br/>
-                
-                <div style="overflow-x:auto;">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No. Telpon</th>
-                            <th>Opsi</th>
-                        </tr>
-                        @foreach($donatur as $data)
-                        <tr>
-                            <td>{{ $data->nama }}</td>
-                            <td>{{ $data->alamat }}</td>
-                            <td>{{ $data->telpon }}</td>
-                            <td style="white-space:nowrap;">
-                                <a class="btn btn-warning btn-sm" href="/donatur/edit/{{ $data->id }}">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="/donatur/delete/{{ $data->id }}">Hapus</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+@extends('layouts.app')
+
+@section('title', 'Donatur')
+
+@section('content')
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="card-title">Data donatur</h4>
+                        <p class="card-category"> Donatur yang menyisihkan sebagian hartanya untuk kepedulian</p>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                    <form action="/donatur/cari" method="GET">
+                        <input class="form-control" type="text" name="cari" placeholder="Pencarian .." value="{{ old('cari') }}" style="color:white;" autocomplete="off">
+                    </form>
+                    </div>
                 </div>
- 
-				<br/>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-sm" href="/donatur/add" style="background-color:#2196f3;margin: 1rem 0 0 2.5rem;">
+                    <i class="material-icons">queue</i>
+                    Tambah Data
+                </a>            
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-info">
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+						<th>No. Telepon</th>
+                        <th>Opsi</th>
+                    </thead>
+                    <tbody>
+                    @foreach($donatur as $data)   
+                    <tr>
+                        <td>{{ ( $donatur->currentPage() - 1 ) * $donatur->perPage() + $nomer++ }}.</td>
+                        <td>{{ $data->nama }}</td>
+						<td>{{ $data->alamat }}</td>
+						<td>{{ $data->telpon }}</td>
+                        <td style="white-space:nowrap;">
+                            <a class="btn btn-warning btn-sm" href="/donatur/edit/{{ $data->id }}" data-toggle="tooltip" title="Edit">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="/donatur/delete/{{ $data->id }}" data-toggle="tooltip" title="Hapus">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                </div>
+                <!-- <br/>
 				Halaman : {{ $donatur->currentPage() }} <br/>
 				Jumlah Data : {{ $donatur->total() }} <br/>
 				Data Per Halaman : {{ $donatur->perPage() }} <br/>
-				<br/>
+				<br/> -->
  
 				{{ $donatur->links() }}
-			</div>
-		</div>
-	</div>
- 
- 
-</body>
-</html>
+            
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+@endsection

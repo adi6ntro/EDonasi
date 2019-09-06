@@ -1,59 +1,55 @@
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-        <title>Donasi</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    Edit Data Referensi Donasi
-                </div>
-                <div class="card-body">
-                    <a href="/reff_donasi" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
-                    
+@extends('layouts.app')
 
-                    <form method="post" action="/reff_donasi/update">
+@section('title', 'Referensi Donasi')
 
-                        {{ csrf_field() }}
+@section('content')
 
-                        <input type="hidden" name="id" value="{{ $reff_donasi->id }}"> <br/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Edit Data Referensi Donasi</h4>
+                <p class="card-category">Silahkan diperbaharui</p>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/reff_donasi/update">
 
+                    {{ csrf_field() }}
+
+                    <input type="hidden" name="id" value="{{ $reff_donasi->id }}">
+
+                    <div class="row">
+                      <div class="col-md-12">
                         <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Ref. Donasi .." value=" {{ $reff_donasi->nama }}">
-
-                            <!-- @if($errors->has('nama'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama')}}
-                                </div>
-                            @endif -->
-
+                          <label>Nama Donasi</label>
+                          <div class="form-group">
+                            <label class="bmd-label-floating"> Contoh: Donasi untuk bencana alama, kemiskinan, dll ..</label>
+                            <input type="text" class="form-control form-control-custom" name="nama" value="{{ $reff_donasi->nama }}">
+                          </div>
                         </div>
+                      </div>
+                    </div>
 
+                    <div class="row">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea name="keterangan" class="form-control" placeholder="Keterangan .."> {{ $reff_donasi->keterangan }} </textarea>
-
-                             <!-- @if($errors->has('alamat'))
-                                <div class="text-danger">
-                                    {{ $errors->first('alamat')}}
-                                </div>
-                            @endif -->
-
+                            <textarea class="form-control form-control-custom" name="keterangan" rows="5">{{ $reff_donasi->keterangan }}</textarea>
                         </div>
+                      </div>
+                    </div>
 
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Simpan">
-                        </div>
+                    <button type="submit" class="btn btn-success pull-right">Simpan</button>
+                    <a href="/transaksi" class="btn btn-warning pull-right">Kembali</a>                  
 
-                    </form>
+                    <div class="clearfix"></div>
 
-                </div>
+                </form>
+            </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection
