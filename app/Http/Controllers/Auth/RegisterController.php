@@ -28,7 +28,13 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo;
+
+    protected function redirectTo()
+    {
+        $this->redirectTo = '/transaksi';
+        return $this->redirectTo; // return dynamicaly generated URL.
+    }
 
     /**
      * Create a new controller instance.

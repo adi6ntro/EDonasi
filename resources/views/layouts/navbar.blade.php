@@ -44,6 +44,9 @@
                 <a class="dropdown-item" href="#">Another One</a>
             </div>
             </li> -->
+            <span style="font-size: 13px;font-family: cursive;">
+                {{ Auth::user()->name }}
+            </span>
             <li class="nav-item dropdown">
             <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="material-icons">person</i>
@@ -52,10 +55,16 @@
                 </p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Log out</a>
+                <!-- <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Settings</a> -->
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="{{ route('logout') }}" 
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    Log out
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
             </li>
         </ul>

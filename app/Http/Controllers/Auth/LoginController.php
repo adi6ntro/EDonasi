@@ -20,6 +20,20 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    // protected function authenticated(Request $request, $user)
+    // {
+    // if ( $user->isAdmin() ) {// do your margic here
+    //     return redirect()->route('dashboard');
+    // }
+
+    // return redirect('/home');
+    // }
+
+    protected function authenticated()
+    {
+        return redirect('/transaksi');
+    }
+
     /**
      * Where to redirect users after login.
      *
